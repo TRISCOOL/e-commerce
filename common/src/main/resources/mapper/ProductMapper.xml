@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecommerce.common.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.ecommerce.common.model.Product" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="cost" property="cost" jdbcType="DECIMAL" />
+    <result column="selling_price" property="sellingPrice" jdbcType="DECIMAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="stock" property="stock" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="shelf_time" property="shelfTime" jdbcType="TIMESTAMP" />
+    <result column="obtained_time" property="obtainedTime" jdbcType="TIMESTAMP" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+    <result column="sell_num" property="sellNum" jdbcType="INTEGER" />
+    <result column="integral_config_id" property="integralConfigId" jdbcType="BIGINT" />
+    <result column="tag" property="tag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_name, cost, selling_price, description, stock, status, shelf_time, obtained_time, 
+    brand, shop_id, type_id, sell_num, integral_config_id, tag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ecommerce.common.model.Product" >
+    insert into product (id, product_name, cost, 
+      selling_price, description, stock, 
+      status, shelf_time, obtained_time, 
+      brand, shop_id, type_id, 
+      sell_num, integral_config_id, tag
+      )
+    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      #{sellingPrice,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{shelfTime,jdbcType=TIMESTAMP}, #{obtainedTime,jdbcType=TIMESTAMP}, 
+      #{brand,jdbcType=VARCHAR}, #{shopId,jdbcType=BIGINT}, #{typeId,jdbcType=BIGINT}, 
+      #{sellNum,jdbcType=INTEGER}, #{integralConfigId,jdbcType=BIGINT}, #{tag,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecommerce.common.model.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="sellingPrice != null" >
+        selling_price,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="shelfTime != null" >
+        shelf_time,
+      </if>
+      <if test="obtainedTime != null" >
+        obtained_time,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="sellNum != null" >
+        sell_num,
+      </if>
+      <if test="integralConfigId != null" >
+        integral_config_id,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sellingPrice != null" >
+        #{sellingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="shelfTime != null" >
+        #{shelfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obtainedTime != null" >
+        #{obtainedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="sellNum != null" >
+        #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="integralConfigId != null" >
+        #{integralConfigId,jdbcType=BIGINT},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecommerce.common.model.Product" >
+    update product
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sellingPrice != null" >
+        selling_price = #{sellingPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="shelfTime != null" >
+        shelf_time = #{shelfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obtainedTime != null" >
+        obtained_time = #{obtainedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=BIGINT},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="sellNum != null" >
+        sell_num = #{sellNum,jdbcType=INTEGER},
+      </if>
+      <if test="integralConfigId != null" >
+        integral_config_id = #{integralConfigId,jdbcType=BIGINT},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecommerce.common.model.Product" >
+    update product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      selling_price = #{sellingPrice,jdbcType=DECIMAL},
+      description = #{description,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      shelf_time = #{shelfTime,jdbcType=TIMESTAMP},
+      obtained_time = #{obtainedTime,jdbcType=TIMESTAMP},
+      brand = #{brand,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=BIGINT},
+      type_id = #{typeId,jdbcType=BIGINT},
+      sell_num = #{sellNum,jdbcType=INTEGER},
+      integral_config_id = #{integralConfigId,jdbcType=BIGINT},
+      tag = #{tag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
